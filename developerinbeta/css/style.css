@@ -42,9 +42,9 @@ h4, h5 {
 
 article {
     text-align: justify;
-    margin: 50px 0px;
+    margin-bottom: 50px;
     background-color: #fff;
-    padding: 100px;
+    padding: 70px 70px;
 }
 
 article h1 {

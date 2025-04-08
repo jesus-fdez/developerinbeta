@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
-    
-    <head include-html="/developerinbeta/layouts/head.html"></head>
+export function solid()
+{
+    return `
+<div class="container">
+    <div class="row">
+        <div class="col-11 mx-auto">
+            
+            <article>
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1">Principios SOLID en programación: qué son y por qué deberías usarlos.</h1>
+                    <a class="badge bg-secondary text-decoration-none link-light mt-3" href="#!">Clean code</a>
+                    <div class="mt-3"><img src="/developerinbeta/assets/img/profile-s.jpg" class="profile" alt="Jesús Fdez." /> Jesús Fdez.</div>
+                </header>
+            
+                <figure class="text-center" style="background-color: #090502;">
+                    <img class="img-fluid" src="/developerinbeta/assets/img/solid01.jpg" alt="Principios SOLID" />
+                </figure>
+            
+                <p>Si alguna vez has trabajado con código desordenado y difícil de mantener, seguramente te has preguntado: ¿Cómo puedo escribir software que sea flexible y fácil de escalar? La respuesta está en los principios SOLID.</p>
+                <p>Los principios SOLID son un conjunto de cinco reglas que te ayudan a diseñar código más limpio, mantenible y robusto. Fueron formulados por Robert C. Martin (Uncle Bob) y han sido una referencia clave en el desarrollo de software orientado a objetos. Si aplicas estos principios, evitarás problemas como código acoplado, difícil de probar o difícil de modificar sin romper otras partes del sistema.</p>
 
-    <body style="visibility: hidden;">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" include-html="/developerinbeta/layouts/nav.html"></nav>
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-11 mx-auto">
-                    
-                    <article>
-                        <header class="mb-4">
-                            <h1 class="fw-bolder mb-1">Principios SOLID en programación: qué son y por qué deberías usarlos.</h1>
-                            <a class="badge bg-secondary text-decoration-none link-light mt-3" href="#!">Clean code</a>
-                            <div class="mt-3"><img src="/developerinbeta/assets/img/profile-s.jpg" class="profile" alt="Jesús Fdez." /> Jesús Fdez.</div>
-                        </header>
-                    
-                        <figure class="text-center" style="background-color: #090502;">
-                            <img class="img-fluid" src="/developerinbeta/assets/img/solid01.jpg" alt="Principios SOLID" />
-                        </figure>
-                    
-                        <p>Si alguna vez has trabajado con código desordenado y difícil de mantener, seguramente te has preguntado: ¿Cómo puedo escribir software que sea flexible y fácil de escalar? La respuesta está en los principios SOLID.</p>
-                        <p>Los principios SOLID son un conjunto de cinco reglas que te ayudan a diseñar código más limpio, mantenible y robusto. Fueron formulados por Robert C. Martin (Uncle Bob) y han sido una referencia clave en el desarrollo de software orientado a objetos. Si aplicas estos principios, evitarás problemas como código acoplado, difícil de probar o difícil de modificar sin romper otras partes del sistema.</p>
+                <h3>Los 5 principios SOLID explicados con ejemplos</h3>
 
-                        <h3>Los 5 principios SOLID explicados con ejemplos</h3>
-
-                        <h4>S - Single Responsibility Principle (Principio de Responsabilidad Única)</h4>
-                        <p>Una clase debe tener solo una responsabilidad en el sistema. Si una clase hace muchas cosas, el código se vuelve difícil de mantener.</p>
-                        <p>Ejemplo: ❌ Incorrecto</p>
+                <h4>S - Single Responsibility Principle (Principio de Responsabilidad Única)</h4>
+                <p>Una clase debe tener solo una responsabilidad en el sistema. Si una clase hace muchas cosas, el código se vuelve difícil de mantener.</p>
+                <p>Ejemplo: ❌ Incorrecto</p>
 
                         
 <pre><code class="language-java">
@@ -233,28 +228,14 @@ class Coche {
 }
 </code></pre>
 
-                        <p>Ahora Coche puede usar cualquier motor que implemente IMotor sin cambios.</p>
-                        <h4>🏆 Conclusión: Por qué deberías aplicar SOLID</h4>
-                        <p>Aplicar los principios SOLID en tus proyectos te ayudará a escribir <span class="blue">código escalable, más limpio y fácil de mantener</span>.</p>
-                        <p>Si quieres mejorar como desarrollador, dominar estos principios es clave. Empieza a aplicarlos desde hoy y verás la diferencia en la calidad de tu código.</p>
-                    </article>
+                <p>Ahora Coche puede usar cualquier motor que implemente IMotor sin cambios.</p>
+                <h4>🏆 Conclusión: Por qué deberías aplicar SOLID</h4>
+                <p>Aplicar los principios SOLID en tus proyectos te ayudará a escribir <span class="blue">código escalable, más limpio y fácil de mantener</span>.</p>
+                <p>Si quieres mejorar como desarrollador, dominar estos principios es clave. Empieza a aplicarlos desde hoy y verás la diferencia en la calidad de tu código.</p>
+            </article>
 
-                </div>
-            </div>
         </div>
-        
-        <footer class="py-5 bg-dark" include-html="/developerinbeta/layouts/footer.html"></footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/developerinbeta/js/scripts.js"></script>
-        <script src="/developerinbeta/js/highlight.min.js"></script>
-        <script src="/developerinbeta/js/java.min.js"></script>
-    </body>
-</html>
-
-<script type="text/javascript">
-
-    includeHTML();
-    hljs.highlightAll();
-
-</script>
+    </div>
+</div>    
+    `;
+}
