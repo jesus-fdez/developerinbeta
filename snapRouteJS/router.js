@@ -1,7 +1,7 @@
 import { config } from "./config.js"
 import { renderHtml } from "./render.js"
 
-export function routeWhenUrlChange()
+export function routeEventWhenUrlChange()
 {
     // Route when url change
     window.addEventListener('popstate', function(e) 

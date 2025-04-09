@@ -35,7 +35,7 @@ export function renderHtml(file, section)
     xhr.send()
 }
 
-export function pageRenderChecker()
+export function pageRenderedPostActions()
 {
     var timer = setInterval(function() {
         if (document.querySelector('footer') != null) {
