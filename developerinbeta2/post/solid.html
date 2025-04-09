@@ -1,6 +1,3 @@
-export function solid()
-{
-    return `
 <div class="container">
     <div class="row">
         <div class="col-11 mx-auto">
@@ -38,8 +35,8 @@ class Reporte {
 }
 </code></pre>
 
-                        <p>Aquí la clase Reporte tiene dos responsabilidades: generar un PDF y guardar en la base de datos. Deberíamos separarlas:</p>
-                        <p>Ejemplo: ✅ Correcto</p>
+                <p>Aquí la clase Reporte tiene dos responsabilidades: generar un PDF y guardar en la base de datos. Deberíamos separarlas:</p>
+                <p>Ejemplo: ✅ Correcto</p>
 
 <pre><code class="language-java">
 class Reporte {
@@ -61,12 +58,11 @@ class GuardarBD {
 }
 </code></pre>
 
-                        <p>Así, cada clase tiene una sola responsabilidad.</p>
+                <p>Así, cada clase tiene una sola responsabilidad.</p>
 
-                        <h4>O - Open/Closed Principle (Principio Abierto/Cerrado)</h4>
-                        <p>El código debe estar abierto para extensión, pero cerrado para modificación.</p>
-                        <p>Esto significa que debemos poder añadir nuevas funcionalidades sin modificar el código existente.</p>
-                        <p>Ejemplo: ❌ Incorrecto</p>
+                <h4>O - Open/Closed Principle (Principio Abierto/Cerrado)</h4>
+                <p>El código debe estar abierto para extensión, pero cerrado para modificación. Esto significa que debemos poder añadir nuevas funcionalidades sin modificar el código existente.</p>
+                <p>Ejemplo: ❌ Incorrecto</p>
 
 <pre><code class="language-java">
 class Calculadora {
@@ -81,8 +77,8 @@ class Calculadora {
 }    
 </code></pre>
 
-                        <p>Si queremos agregar multiplicación o división, tendríamos que modificar la clase. Mejor usar polimorfismo:</p>
-                        <p>Ejemplo: ✅ Correcto</p>
+                <p>Si queremos agregar multiplicación o división, tendríamos que modificar la clase. Mejor usar polimorfismo:</p>
+                <p>Ejemplo: ✅ Correcto</p>
 
 <pre><code class="language-java">
 interface Operacion {
@@ -102,12 +98,11 @@ class Resta implements Operacion {
 }
 </code></pre>
 
-                        <p>Ahora podemos agregar nuevas operaciones sin tocar el código existente.</p>
+                <p>Ahora podemos agregar nuevas operaciones sin tocar el código existente.</p>
 
-                        <h4>L - Liskov Substitution Principle (Principio de Sustitución de Liskov)</h4>
-                        <p>Las subclases deben poder sustituir a la clase base sin problemas.</p>
-                        <p>Si heredas una clase, la subclase debe comportarse como la clase padre sin causar errores inesperados.</p>
-                        <p>Ejemplo: ❌ Incorrecto</p>
+                <h4>L - Liskov Substitution Principle (Principio de Sustitución de Liskov)</h4>
+                <p>Las subclases deben poder sustituir a la clase base sin problemas. Si heredas una clase, la subclase debe comportarse como la clase padre sin causar errores inesperados.</p>
+                <p>Ejemplo: ❌ Incorrecto</p>
 
 <pre><code class="language-java">
 class Ave {
@@ -124,8 +119,8 @@ class Pinguino extends Ave {
 }
 </code></pre>
 
-                        <p>Un pingüino no debería heredar un método que no puede usar.</p>
-                        <p>Ejemplo: ✅ Correcto</p>
+                <p>Un pingüino no debería heredar un método que no puede usar.</p>
+                <p>Ejemplo: ✅ Correcto</p>
 
 <pre><code class="language-java">
 class Ave {}
@@ -143,12 +138,11 @@ class Pinguino extends Ave {
 }
 </code></pre>
 
-                        <p>Ahora el pinguino no viola el principio de Liskov.</p>
+                <p>Ahora el pinguino no viola el principio de Liskov.</p>
 
-                        <h4>I - Interface Segregation Principle (Principio de Segregación de Interfaces)</h4>
-                        <p>Las clases no deben verse forzadas a implementar interfaces que no utilizan.</p>
-                        <p>Si una interfaz es muy grande, es mejor dividirla en interfaces más pequeñas y específicas.</p>
-                        <p>Ejemplo: ❌ Incorrecto</p>
+                <h4>I - Interface Segregation Principle (Principio de Segregación de Interfaces)</h4>
+                <p>Las clases no deben verse forzadas a implementar interfaces que no utilizan. Si una interfaz es muy grande, es mejor dividirla en interfaces más pequeñas y específicas.</p>
+                <p>Ejemplo: ❌ Incorrecto</p>
 
 <pre><code class="language-java">
 interface Trabajador {
@@ -157,8 +151,8 @@ interface Trabajador {
 }
 </code></pre>
 
-                        <p>Si tenemos un programador, no debería verse obligado a implementar cocinar().</p>
-                        <p>Ejemplo: ✅ Correcto</p>
+                <p>Si tenemos un programador, no debería verse obligado a implementar cocinar().</p>
+                <p>Ejemplo: ✅ Correcto</p>
 
 <pre><code class="language-java">
 interface Programador {
@@ -182,12 +176,11 @@ class Chef implements Cocinero {
 }
 </code></pre>
 
-                        <p>Ahora cada clase solo implementa lo que necesita.</p>
+                <p>Ahora cada clase solo implementa lo que necesita.</p>
 
-                        <h4>D - Dependency Inversion Principle (Principio de Inversión de Dependencias)</h4>
-                        <p>Los módulos de alto nivel no deben depender de módulos de bajo nivel, sino de abstracciones.</p>
-                        <p>Esto significa que una clase no debe depender de otra concreta, sino de una interfaz o abstracción.</p>
-                        <p>Ejemplo: ❌ Incorrecto</p>
+                <h4>D - Dependency Inversion Principle (Principio de Inversión de Dependencias)</h4>
+                <p>Los módulos de alto nivel no deben depender de módulos de bajo nivel, sino de abstracciones. Esto significa que una clase no debe depender de otra concreta, sino de una interfaz o abstracción.</p>
+                <p>Ejemplo: ❌ Incorrecto</p>
 
 <pre><code class="language-java">
 class Motor {
@@ -205,8 +198,8 @@ class Coche {
 }
 </code></pre>
 
-                        <p>El coche depende directamente de Motor. Si cambiamos Motor, hay que modificar Coche.</p>
-                        <p>Ejemplo: ✅ Correcto</p>
+                <p>El coche depende directamente de Motor. Si cambiamos Motor, hay que modificar Coche.</p>
+                <p>Ejemplo: ✅ Correcto</p>
 
 <pre><code class="language-java">
 interface IMotor {
@@ -236,6 +229,4 @@ class Coche {
 
         </div>
     </div>
-</div>    
-    `;
-}
+</div>
