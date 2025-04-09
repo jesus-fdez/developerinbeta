@@ -8,11 +8,9 @@ renderHtml(`${config.env.pathPrefix}layout/header.html`, document.querySelector(
 renderHtml(`${config.env.pathPrefix}layout/footer.html`, document.querySelector('footer'))
 renderHtml(`${config.env.pathPrefix}layout/home.html`, 'home')
 
-// Make visible home
-document.body.style.visibility = 'visible'
-
 // Route when url change
-window.addEventListener('popstate', function(e) {
+window.addEventListener('popstate', function(e) 
+{
     var path = location.hash.replace('#/', '')
 
     if (path.indexOf(config.env.postPrefix) >= 0) {
@@ -21,3 +19,18 @@ window.addEventListener('popstate', function(e) {
         renderHtml(`${config.env.pathPrefix}layout/${config.routes[path].html}`, config.routes[path].section)
     }
 })
+
+var timer = setInterval(function() 
+{
+    if (document.querySelector('footer') != null) {
+        // Make visible home
+        document.body.style.visibility = 'visible'
+        document.body.classList.replace('hidden', 'show')
+
+        document.querySelectorAll('a').forEach((link) => {
+            console.log(link.href)
+        })
+
+        clearInterval(timer)
+    }
+ }, 1000);

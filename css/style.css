@@ -3,7 +3,7 @@ body {
 }
 
 header.index {
-    background-image: url(/developerinbeta/assets/img/banner.jpg);
+    background-image: url(/assets/img/banner.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -86,4 +86,15 @@ img.profile-l {
 span.blue {
     color: var(--bs-link-color);
     font-weight: bold;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-in;
 }

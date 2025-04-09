@@ -13,7 +13,7 @@ const config =
     },
 
     env: {
-        pathPrefix: '/developerinbeta/',
+        pathPrefix: '',
         postPrefix: 'post'
     }
 }
