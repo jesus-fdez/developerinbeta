@@ -70,6 +70,7 @@ article pre, article figure {
 
 article img {
     margin-bottom: 1rem;
+    width: -webkit-fill-available;
     max-width: 700px;
 }
 
