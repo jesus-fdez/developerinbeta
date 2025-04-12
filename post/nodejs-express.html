@@ -1,0 +1,213 @@
+<meta property="og:image" content="assets/img/node01.jpg">
+<meta property="og:image:type" content="image/jpg">
+<meta property="og:image:width" content="700">
+<meta property="og:image:height" content="350">
+
+<div class="container">
+    <div class="row">
+        <div class="col-11 mx-auto">
+            
+            <article>
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1">Cómo crear un API Rest con Node.js y Express.</h1>
+                    <a class="badge bg-secondary text-decoration-none link-light mt-3" href="#!">Nodejs</a>
+                    <div class="mt-3"><img src="assets/img/profile-s.jpg" class="profile" alt="Jesús Fdez." /> Jesús Fdez.</div>
+                </header>
+                
+                <figure class="text-center" style="background-color: #E0DCE2;">
+                    <img class="img-fluid" src="assets/img/node01.jpg" alt="Nodejs y Express" />
+                </figure>
+
+                <p><span class="blue">Node.js</span> es una de las tecnologías más populares para construir APIs rápidas, escalables y modernas. En este artículo te mostraré cómo instalar Node.js, cómo iniciar un proyecto con Express y cómo estructurarlo siguiendo la filosofía de Clean Architecture propuesta por Uncle Bob.</p>
+
+                <h5>1. Instalación de Node.js</h5>
+
+                <p>Antes de empezar, necesitas tener Node.js y npm (Node Package Manager) instalados. Puedes descargarlo desde su sitio oficial <a href="https://nodejs.org" target="_blank">https://nodejs.org</a></p>
+
+                <p></p>
+
+                <p>Para comprobar si ya tienes Node.js y npm instalados, ejecuta en tu terminal:</p>
+
+<pre><code class="language-bash">node -v
+npm -v</code></pre>
+
+                <p>Deberías ver las versiones de ambas.</p>
+
+                <h5>2. Inicializar el proyecto y añadir Express</h5>
+
+                <p>Una vez instalado Node.js, crea una carpeta para tu proyecto y ejecuta lo siguiente:</p>
+
+<pre><code class="language-bash">mkdir my-api
+cd my-api
+npm init -y</code></pre>
+
+                <p>Ahora instala Express, que es el framework que nos proporciona un conjunto de herramientas para:</p>
+                <ul>
+                    <li>Crear aplicaciones web.</li>
+                    <li>Peticiones y respuestas HTTP.</li>
+                    <li>Enrutamiento y middleware para construir y desplegar aplicaciones a gran escala.</li>
+                </ul>
+
+                <pre><code class="language-bash">npm install express</code></pre>
+
+                <p>Este comando creará un archivo <code>package.json</code> en el directorio de tu proyecto. Este archivo contiene información sobre tu proyecto, como el nombre, la versión, las dependencias, etc. Se verá algo así:</p>
+
+<pre><code class="language-javascript">{
+    "name": "my-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "express": "^5.1.0"
+    }
+}</code></pre>
+
+                <h5>3. Instalar Nodemon</h5>
+                <p>Antes de seguir, vamos a instalar una utilidad para que NO tengas que parar e iniciar de nuevo la aplicación cada vez que realices cambios en el código. Esto lo hará <a href="https://www.npmjs.com/package/nodemon" target="_blank">Nodemon</a> por ti.</p>
+                <p>Vamos a instalarlo de forma global, para que ya lo tengas disponible para demás proyectos Node:</p>
+                <pre><code class="language-bash">npm install -g nodemon</code></pre>
+                <p>En cualquier proyecto node que tengas, crea una nueva entrada script en el <code>package.json</code> arrancando nuestra instancia de Node con nodemon:</p>
+<pre><code class="language-javascript">"scripts": {
+    "dev": "nodemon index.js"
+}</code></pre>
+
+                <h5>4. Crear index.js</h5>
+                <p>Vamos a crear nuestro archivo principal <code>index.js</code>, en la carpeta raíz de nuestro proyecto. Este archivo desempeñará el papel fundamental de punto de entrada para nuestra aplicación. En él, importarás el módulo Express y generarás una instancia de la aplicación. El contenido <code>index.js</code> será el siguiente:</p>
+<pre><code class="language-javascript">const express = require('express');
+const app = express();
+const router = express.Router();
+const port = 3000
+
+app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+});
+
+module.exports = router;</code></pre>
+
+                <p>Una vez listo <code>index.js</code> y configurado Nodemon en <code>package.json</code>, lanzamos la aplicación:</p>
+                <pre><code class="language-bash">npm run dev</code></pre>
+
+                <p>Verás en consola algo similar a lo siguiente:</p>
+<pre><code class="language-javascript">npm run dev
+
+    > my-api@1.0.0 dev
+    > nodemon index.js
+    
+    [nodemon] 3.1.9
+    [nodemon] to restart at any time, enter `rs`
+    [nodemon] watching path(s): *.*
+    [nodemon] watching extensions: js,mjs,cjs,json
+    [nodemon] starting `node index.js`
+    Server listening on http://localhost:3000</code></pre>
+
+                <p>Ahí podemos ver nuestro mensaje <code>Server listening on http://localhost:3000</code>. De momento no hemos hecho nada para responder peticiones http. Antes de desarrollar routes, controllers y demás, vamos a plantear una estructura de proyecto con capas separadas que sea escalable.</p>
+
+                <h5>5. Estructura del proyecto con Clean Architecture</h5>
+
+                <p>Clean Architecture sugiere separar las responsabilidades en capas bien definidas. A continuación, una posible estructura para tu API:</p>
+
+<pre><code class="language-bash">my-api/
+├── src/
+│   ├── domain/
+│   │   └── entities/
+│   │   └── usecases/
+│   ├── infrastructure/
+│   │   └── config/
+│   │   └── database/
+│   ├── interfaces/
+│   │   └── controllers/
+│   │   └── routes/
+│   ├── app/
+│   │   └── server.js
+├── package.json
+</code></pre>
+
+                <p>Explicación rápida:</p>
+                <ul>
+                <li><strong>domain/</strong>: Contiene lógica de negocio pura, sin dependencias.</li>
+                <li><strong>infrastructure/</strong>: Configuraciones, conexiones externas (DB, servicios).</li>
+                <li><strong>interfaces/</strong>: Entradas y salidas, como controladores y rutas.</li>
+                <li><strong>app/</strong>: Punto de entrada de la aplicación.</li>
+                </ul>
+
+                <h5>6. Crear un endpoint básico</h5>
+
+                <p>Vamos a crear un endpoint de ejemplo. Primero, crea el archivo <code>src/app/server.js</code> con el contenido de index.js. Iremos creando ya la estructura propuesta en el punto 5, así que el punto de entrada de la app estará en <code>src/app</code> y lo tendremos en un fichero llamado <code>server.js</code>. Como hemos dicho tiene la misma misión que <code>index.js</code> (así que puedes borrarlo y nos quedamos sólo con <code>server.js</code>):</p>
+
+<pre><code class="language-javascript">// src/app/server.js
+const port = 3000
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const routes = require('../interfaces/routes');
+
+app.use(cors())
+app.use('/api', routes);
+
+app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+});
+</code></pre>
+
+                <p>Luego crea la ruta GET en su paquete:</p>
+
+<pre><code class="language-javascript">// src/interfaces/routes/index.js
+const express = require('express');
+const router = express.Router();
+const helloController = require('../controllers/HelloController');
+
+router.get('/hello', helloController.sayHello);
+
+module.exports = router;
+</code></pre>
+
+                <p>Y finalmente el controlador:</p>
+
+<pre><code class="language-javascript">// src/interfaces/controllers/HelloController.js
+exports.sayHello = (req, res) => {
+    try {
+        res.json({ message: 'Hola desde tu primera API con Clean Architecture!' });
+    } catch(err) {
+        console.log(err)
+    }
+};
+</code></pre>
+
+                <h5>5. Instalar cors</h5>
+                <p>Te habrá llamada la atención esta línea <code>const cors = require('cors');</code>.</p>
+                <p><b>¿Cómo funciona CORS?</b></p>
+                <p>Cuando un frontend realiza una solicitud de origen cruzado, el navegador primero envía una solicitud de verificación previa (una solicitud HTTP OPTIONS) al servidor. Esta solicitud comprueba si el servidor permite la solicitud original (por ejemplo, una POSTsolicitud con ciertos encabezados) del dominio de origen. Si el servidor responde con los encabezados CORS correctos, el navegador permite la solicitud; de lo contrario, la bloquea.</p>
+                <p>¿Cómo se configura cors en apps con Node.js? Sencillo, instalándolo desde consola:</p>
+                <pre><code class="language-bash">npm install cors</code></pre>
+                <p>Luego importándolo en el proyecyo con <code>require</code>, como has visto en el código.</p>
+
+                <h5>6. Ejecutar el API</h5>
+                <p>Ahora ya sí puedes lanzar el API, hay que indicarle a Nodemon que ahora debe ejecutar <code>src/app/server.js</code>. Modifica en <code>package.json</code>:</p>
+                <pre><code class="language-javascript">"dev": "nodemon index.js"</code></pre>
+                <p>por</p>
+                <pre><code class="language-bash">"dev": "nodemon src/app/server.js"</code></pre>
+
+                <p>Lanzamos en consola, si no lo tenemos ya, <code>npm run dev</code>, recuerda... Nodemon ya se encarga de refrescar el comando cuando haya cambios en el código.</p>
+                <p>Y prueba tu endpoint accediendo a <code>http://localhost:3000/api/hello</code>.</p>
+
+                <img src="assets/img/node02.jpg" />
+
+                <h5>📝 Resumen</h5>
+                <p><code>server.js</code> es el punto de entrada de la aplicación. Además de otras cosas que hemos visto, importa <code>../interfaces/routes</code> y luego hace uso de las rutas con <code>app.use('/api', routes);</code>. El paquete <code>routes</code> tiene un <code>index.js</code> donde define las rutas con su controller. Cada controller gestiona la recepción de las peticiones.</p>
+                
+                <h5>💡 Organización del código</h5>
+                <p>El controller no debería tener lógica de negocio, sólo debería invocar a los <code>usecases (domain)</code> y éstos a los <code>repos (infrastructure)</code>. Ese podría ser un flujo básico de una petición, así tenemos separadas las capas.</p>
+                
+                <h5>🏆 Conclusión</h5>
+                <p>Con esta estructura, tu API es escalable, modular y fácil de mantener. Clean Architecture te permite separar las preocupaciones, facilitando las pruebas, el mantenimiento y la incorporación de nuevas funcionalidades. En próximos artículos profundizaremos en cómo añadir use cases, repositorios y pruebas automatizadas.</p>
+            </article>
+
+        </div>
+    </div>
+</div>

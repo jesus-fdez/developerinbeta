@@ -41,7 +41,7 @@ h4, h5 {
 }
 
 article {
-    text-align: justify;
+    /* text-align: justify; */
     margin-bottom: 50px;
     background-color: #fff;
     padding: 70px 70px;
@@ -70,7 +70,7 @@ article pre, article figure {
 
 article img {
     margin-bottom: 1rem;
-    width: 100%;
+    max-width: 700px;
 }
 
 img.profile {
